@@ -7,8 +7,8 @@ const loop = require('loop-things');
 const path = require('path');
 const util = require('util');
 
-if (process.argv[1] === '--help') {
-
+if (process.argv[2] === '--help') {
+  return console.log(`\n  usage:\n\n    meta git status\n`);
 }
 
 const status = require('../lib/status');
