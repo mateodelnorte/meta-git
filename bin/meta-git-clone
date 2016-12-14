@@ -1,0 +1,51 @@
+#!/usr/bin/env node
+
+const program = require('commander');
+const debug = require('debug')('meta-git-clone');
+const path = require('path');
+
+if ( ! process.argv[2] || process.argv[2] === '--help')
+  return console.log(`\n  usage:\n\n    meta git clone <metaRepoUrl>\n`);
+
+const repoUrl = process.argv[2] === 'blank' ?
+                      process.argv[3] :
+                      process.argv[2];
+
+const dirname = path.basename(repoUrl).replace('.git', '')
+
+const cloneMeta = require('../lib/cloneMeta');
+
+console.log(`meta git cloning into \'${repoUrl}\'...`);
+
+cloneMeta(repoUrl, (err, result) => {
+  if (err) throw err;
+
+  // read .meta file
+  var meta = null; 
+  var buffer = null;
+
+  process.chdir(path.resolve(dirname));
+
+  const metaLocation = path.join(process.cwd(), '.meta');
+
+  try {
+    buffer = fs.readFileSync(metaLocation);
+    debug(`.meta file found at ${metaLocation}`);
+  } catch (e) {
+    debug(`no .meta file found at ${metaLocation}`);
+  }
+
+  if (buffer) {
+    try {
+      meta = JSON.parse(buffer.toString());
+      debug(`.meta file contents parsed: ${util.inspect(meta, null, Infinity)}`);
+    } catch (e) {
+      debug(`error parsing .looprc JSON: ${e}`);
+    }
+  }
+
+  // loop dirs with git clone 
+
+  console.log(`finished`);
+
+});

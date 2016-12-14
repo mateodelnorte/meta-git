@@ -1,0 +1,8 @@
+#!/usr/bin/env node
+
+const program = require('commander');
+const debug = require('debug')('meta-git');
+
+program
+  .command('clone', 'manage your meta repo and child git repositories')
+  .parse(process.argv);

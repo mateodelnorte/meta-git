@@ -1,0 +1,37 @@
+{
+  "name": "meta-git",
+  "version": "0.0.0",
+  "description": "git plugin for meta",
+  "main": "index.js",
+  "bin": {
+    "meta-git": "./bin/meta-git",
+    "meta-git-clone": "./bin/meta-git-clone"
+  },
+  "scripts": {
+    "test": "npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/mateodelnorte/meta.git"
+  },
+  "keywords": [
+    "git",
+    "meta",
+    "repo",
+    "repository",
+    "metarepository",
+    "metarepo"
+  ],
+  "author": "hi@iammattwalters.com",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mateodelnorte/meta/issues"
+  },
+  "homepage": "https://github.com/mateodelnorte/meta#readme",
+  "dependencies": {
+    "commander": "^2.9.0",
+    "debug": "^2.3.3",
+    "loop-things": "0.0.8",
+    "spawn-to-readstream": "^0.1.3"
+  }
+}
