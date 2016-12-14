@@ -1,8 +1,10 @@
 #!/usr/bin/env node
 
+const fs = require('fs');
 const program = require('commander');
 const debug = require('debug')('meta-git-clone');
 const path = require('path');
+const util = require('util');
 
 if ( ! process.argv[2] || process.argv[2] === '--help')
   return console.log(`\n  usage:\n\n    meta git clone <metaRepoUrl>\n`);
@@ -13,26 +15,24 @@ const repoUrl = process.argv[2] === 'blank' ?
 
 const dirname = path.basename(repoUrl).replace('.git', '')
 
-const cloneMeta = require('../lib/cloneMeta');
+const clone = require('../lib/clone');
 
-console.log(`meta git cloning into \'${repoUrl}\'...`);
+console.log(`meta git cloning into \'${repoUrl}\' at ${dirname}`);
 
-cloneMeta(repoUrl, (err, result) => {
+clone(repoUrl, dirname, (err, result) => {
   if (err) throw err;
 
   // read .meta file
   var meta = null; 
   var buffer = null;
 
-  process.chdir(path.resolve(dirname));
-
-  const metaLocation = path.join(process.cwd(), '.meta');
+  const metaLocation = path.join(process.cwd(), dirname, '.meta');
 
   try {
     buffer = fs.readFileSync(metaLocation);
     debug(`.meta file found at ${metaLocation}`);
   } catch (e) {
-    debug(`no .meta file found at ${metaLocation}`);
+    debug(`no .meta file found at ${metaLocation}: ${e}`);
   }
 
   if (buffer) {
@@ -40,12 +40,38 @@ cloneMeta(repoUrl, (err, result) => {
       meta = JSON.parse(buffer.toString());
       debug(`.meta file contents parsed: ${util.inspect(meta, null, Infinity)}`);
     } catch (e) {
-      debug(`error parsing .looprc JSON: ${e}`);
+      debug(`error parsing .meta JSON: ${e}`);
     }
   }
 
-  // loop dirs with git clone 
+  const newDir = path.resolve(dirname);
 
-  console.log(`finished`);
+  debug(`chdir to ${newDir}`);
+  process.chdir(newDir);
+
+  const projects = meta.projects;
+  const folders = Object.keys(projects);
+
+  var folder = null;
+
+  function child (err) {
+    if (err) throw err;
+    
+    if ( ! folders.length) return console.log(`finished`);
+
+    folder = folders.pop()
+
+    const gitUrl = projects[folder];
+
+    clone(gitUrl, folder, (err) => {
+      if (err) throw err;
+
+      child();
+
+    });
+
+  }
+
+  child();
 
 });

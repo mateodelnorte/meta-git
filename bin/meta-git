@@ -4,5 +4,6 @@ const program = require('commander');
 const debug = require('debug')('meta-git');
 
 program
-  .command('clone', 'manage your meta repo and child git repositories')
+  .command('clone', 'clone meta and child repositories')
+  .command('status', 'git status of meta and child repositories')
   .parse(process.argv);
