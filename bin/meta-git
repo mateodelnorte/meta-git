@@ -1,5 +1,9 @@
 #!/usr/bin/env node
 
+let loaded = false;
+
+if (loaded) return process.kill();
+
 const program = require('commander');
 const debug = require('debug')('meta-git');
 
@@ -7,3 +11,5 @@ program
   .command('clone', 'clone meta and child repositories')
   .command('status', 'git status of meta and child repositories')
   .parse(process.argv);
+
+loaded = true;
