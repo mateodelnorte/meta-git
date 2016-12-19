@@ -33,7 +33,7 @@
     "chalk": "^1.1.3",
     "commander": "^2.9.0",
     "debug": "^2.3.3",
-    "loop-things": "0.0.13",
+    "loop-things": "0.0.15",
     "spawn-to-readstream": "^0.1.3"
   }
 }
