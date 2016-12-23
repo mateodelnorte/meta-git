@@ -11,38 +11,33 @@ if (process.argv[2] === '--help') {
   return console.log(`\n  usage:\n\n    meta git status\n`);
 }
 
-const status = require('../lib/status');
+var meta = null; 
+var buffer = null;
 
-status((err, result) => {
-  if (err) throw err;
+const metaLocation = path.join(process.cwd(), '.meta');
 
-  var meta = null; 
-  var buffer = null;
+try {
+  buffer = fs.readFileSync(metaLocation);
+  debug(`.meta file found at ${metaLocation}`);
+} catch (e) {
+  debug(`no .meta file found at ${metaLocation}: ${e}`);
+}
 
-  const metaLocation = path.join(process.cwd(), '.meta');
-
+if (buffer) {
   try {
-    buffer = fs.readFileSync(metaLocation);
-    debug(`.meta file found at ${metaLocation}`);
+    meta = JSON.parse(buffer.toString());
+    debug(`.meta file contents parsed: ${util.inspect(meta, null, Infinity)}`);
   } catch (e) {
-    debug(`no .meta file found at ${metaLocation}: ${e}`);
+    debug(`error parsing .meta JSON: ${e}`);
   }
+}
 
-  if (buffer) {
-    try {
-      meta = JSON.parse(buffer.toString());
-      debug(`.meta file contents parsed: ${util.inspect(meta, null, Infinity)}`);
-    } catch (e) {
-      debug(`error parsing .meta JSON: ${e}`);
-    }
-  }
+const projects = meta.projects;
+const folders = Object.keys(projects).map((folder) => { return path.resolve(folder); });
 
-  const projects = meta.projects;
-  const folders = Object.keys(projects).map((folder) => { return path.resolve(folder); });
+folders.unshift(process.cwd());
 
-  loop({
-    command: 'git status',
-    directories: folders
-  })
-
+loop({
+  command: 'git status',
+  directories: folders
 });
