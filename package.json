@@ -1,6 +1,6 @@
 {
   "name": "meta-git",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "git plugin for meta",
   "main": "index.js",
   "bin": {
