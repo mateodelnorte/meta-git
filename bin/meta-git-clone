@@ -1,9 +1,10 @@
 #!/usr/bin/env node
 
+const exec = require('meta-exec');
 const fs = require('fs');
-const program = require('commander');
 const debug = require('debug')('meta-git-clone');
 const path = require('path');
+const program = require('commander');
 const util = require('util');
 
 if ( ! process.argv[2] || process.argv[2] === '--help')
@@ -13,13 +14,11 @@ const repoUrl = process.argv[2] === 'blank' ?
                       process.argv[3] :
                       process.argv[2];
 
-const dirname = path.basename(repoUrl).replace('.git', '')
-
-const clone = require('../lib/clone');
+const dirname = path.basename(repoUrl).replace('.git', '');
 
 console.log(`meta git cloning into \'${repoUrl}\' at ${dirname}`);
 
-clone(repoUrl, dirname, (err, result) => {
+exec({ cmd: `git clone ${repoUrl} ${dirname}`, displayDir: dirname }, (err, result) => {
   if (err) throw err;
 
   // read .meta file
@@ -57,13 +56,13 @@ clone(repoUrl, dirname, (err, result) => {
   function child (err) {
     if (err) throw err;
     
-    if ( ! folders.length) return console.log(`finished`);
+    if ( ! folders.length) return 0;
 
     folder = folders.pop()
 
     const gitUrl = projects[folder];
 
-    clone(gitUrl, folder, (err) => {
+    exec({ cmd: `git clone ${gitUrl} ${folder}`, displayDir: path.join(newDir, folder) },  (err) => {
       if (err) throw err;
 
       child();

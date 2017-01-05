@@ -32,6 +32,8 @@ if (buffer) {
   }
 }
 
+if ( ! meta) return console.error(`No .meta file found in ${process.cwd()}. Are you in a meta repo?`);
+
 const projects = meta.projects;
 const folders = Object.keys(projects).map((folder) => { return path.resolve(folder); });
 
