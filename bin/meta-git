@@ -8,6 +8,7 @@ const program = require('commander');
 const debug = require('debug')('meta-git');
 
 program
+  .command('checkout', 'checkout a common branch across all repositories')
   .command('clone', 'clone meta and child repositories')
   .command('status', 'git status of meta and child repositories')
   .parse(process.argv);

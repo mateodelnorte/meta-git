@@ -5,6 +5,7 @@
   "main": "index.js",
   "bin": {
     "meta-git": "./bin/meta-git",
+    "meta-git-checkout": "./bin/meta-git-checkout",
     "meta-git-clone": "./bin/meta-git-clone",
     "meta-git-status": "./bin/meta-git-status"
   },
