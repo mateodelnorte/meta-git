@@ -23,13 +23,15 @@ git plugin for [meta](https://github.com/mateodelnorte/meta)
 ```
 ➜  development meta git
 
-  Usage: meta-git [options] [command]
+    Usage: meta-git [options] [command]
 
 
   Commands:
 
+    checkout    checkout a common branch across all repositories
     clone       clone meta and child repositories
     status      git status of meta and child repositories
+    update      clone any repos that exist in your .meta file but aren't cloned locally
     help [cmd]  display help for [cmd]
 
   Options:
