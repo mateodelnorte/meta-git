@@ -1,12 +1,13 @@
 {
   "name": "meta-git",
-  "version": "0.0.15",
+  "version": "0.0.16",
   "description": "git plugin for meta",
   "main": "index.js",
   "bin": {
     "meta-git": "./bin/meta-git",
     "meta-git-checkout": "./bin/meta-git-checkout",
     "meta-git-clone": "./bin/meta-git-clone",
+    "meta-git-pull": "./bin/meta-git-pull",
     "meta-git-status": "./bin/meta-git-status",
     "meta-git-update": "./bin/meta-git-update"
   },
