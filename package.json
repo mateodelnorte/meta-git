@@ -8,6 +8,7 @@
     "meta-git-checkout": "./bin/meta-git-checkout",
     "meta-git-clone": "./bin/meta-git-clone",
     "meta-git-pull": "./bin/meta-git-pull",
+    "meta-git-remote": "./bin/meta-git-remote",
     "meta-git-status": "./bin/meta-git-status",
     "meta-git-update": "./bin/meta-git-update"
   },
