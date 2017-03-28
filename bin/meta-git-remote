@@ -22,7 +22,8 @@ let first = process.argv[2] === 'blank' ?
                       process.argv[2] || '';
 
 const subCommandParsers = {
-  '-v': function (argv) { return '' },
+  '': function (argv) { return '' },
+  '-v': function (argv) { return '-v' },
   'show': function (argv) {
     let remote = process.argv[3] === 'blank' ?
                       process.argv[4] || '':
@@ -30,7 +31,7 @@ const subCommandParsers = {
     return `show ${remote}`;
   },
   'rename': function (argv) {
-    
+
   },
   'rm': function (argv) {}
 }
