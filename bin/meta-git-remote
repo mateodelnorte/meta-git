@@ -7,40 +7,45 @@ const loop = require('loop-things');
 const path = require('path');
 const util = require('util');
 
-const usages = `\n  usages:\n
-    meta git remote
-    meta git remote -v
-    meta git remote show origin
-    meta git remote rename oldname newname
-    meta git remote rm name`;
+// TODO: refactor to standard usage parser, where you can paste in the usage from the wrapped command and it will both output meta usage when given --help and also intelligently 
+// compare given syntax against known wrapped command usage to display --help when an incorrect command is given
+const usages = `
+usage: meta git remote [-v | --verbose]
+   or: meta git remote add [-t <branch>] [-m <master>] [-f] [--tags | --no-tags] [--mirror=<fetch|push>] <name> <url>
+   or: meta git remote rename <old> <new>
+   or: meta git remote remove <name>
+   or: meta git remote set-head <name> (-a | --auto | -d | --delete | <branch>)
+   or: meta git remote [-v | --verbose] show [-n] <name>
+   or: meta git remote prune [-n | --dry-run] <name>
+   or: meta git remote [-v | --verbose] update [-p | --prune] [(<group> | <remote>)...]
+   or: meta git remote set-branches [--add] <name> <branch>...
+   or: meta git remote get-url [--push] [--all] <name>
+   or: meta git remote set-url [--push] <name> <newurl> [<oldurl>]
+   or: meta git remote set-url --add <name> <newurl>
+   or: meta git remote set-url --delete <name> <url>
 
-if (process.argv[2] === '--help')
-  return console.log(usages);
+    -v, --verbose         be verbose; must be placed before a subcommand`;
 
-let first = process.argv[2] === 'blank' ?
-                      process.argv[3] || '':
-                      process.argv[2] || '';
+if (process.argv[2] === '--help') return console.log(usages);
 
-const subCommandParsers = {
-  '': function (argv) { return '' },
-  '-v': function (argv) { return '-v' },
-  'show': function (argv) {
-    let remote = process.argv[3] === 'blank' ?
-                      process.argv[4] || '':
-                      process.argv[3] || '';
-    return `show ${remote}`;
-  },
-  'rename': function (argv) {
+var valid = new Set();
+valid.add(undefined);
+valid.add('-v');
+valid.add('add');
+valid.add('rename');
+valid.add('remove');
+valid.add('set-head');
+valid.add('show');
+valid.add('set-branches');
+valid.add('get-url');
+valid.add('set-url');
 
-  },
-  'rm': function (argv) {}
-}
+if ( ! valid.has(process.argv[2])) return console.log(usages);
 
-const subCommandParser = subCommandParsers[first];
+process.argv.shift()
+process.argv.shift()
 
-if ( ! subCommandParser) return console.log(usages);
-
-const subCommand = subCommandParser(process.argv);
+const subCommand = process.argv.join(' ');
 
 var meta = null; 
 var buffer = null;
