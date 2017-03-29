@@ -36,7 +36,8 @@
     "chalk": "^1.1.3",
     "commander": "^2.9.0",
     "debug": "^2.3.3",
-    "loop-things": "0.0.22",
-    "meta-exec": "0.0.0"
+    "loop-things": "0.0.23",
+    "meta-exec": "0.0.0",
+    "meta-loop": "0.0.0"
   }
 }
