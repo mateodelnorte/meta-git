@@ -7,7 +7,7 @@ const loop = require('loop-things');
 const path = require('path');
 const util = require('util');
 
-// TODO: refactor to standard usage parser, where you can paste in the usage from the wrapped command and it will both output meta usage when given --help and also intelligently 
+// TODO: refactor to standard usage parser, where you can paste in the usage from the wrapped command and it will both output meta usage when given --help and also intelligently
 // compare given syntax against known wrapped command usage to display --help when an incorrect command is given
 const usages = `
 usage: meta git remote [-v | --verbose]
@@ -28,7 +28,7 @@ usage: meta git remote [-v | --verbose]
 
 if (process.argv[2] === '--help') return console.log(usages);
 
-var valid = new Set();
+const valid = new Set();
 valid.add(undefined);
 valid.add('-v');
 valid.add('add');
@@ -47,7 +47,7 @@ process.argv.shift()
 
 const subCommand = process.argv.join(' ');
 
-var meta = null; 
+var meta = null;
 var buffer = null;
 
 const metaLocation = path.join(process.cwd(), '.meta');
