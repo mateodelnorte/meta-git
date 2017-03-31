@@ -29,8 +29,6 @@ usage: meta git remote [-v | --verbose]
 
 if ( ! assertUsage('meta git remote', usage)) return console.log(usage);
 
-if (process.argv[2] === '--help') return console.log(usage);
-
 const subCommand = process.argv.slice(2).join(' ');
 
 var meta = null;
