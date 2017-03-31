@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 
+const assertUsage = require('../lib/assertUsage');
 const fs = require('fs');
 const program = require('commander');
 const debug = require('debug')('meta-git-remote');
@@ -9,7 +10,7 @@ const util = require('util');
 
 // TODO: refactor to standard usage parser, where you can paste in the usage from the wrapped command and it will both output meta usage when given --help and also intelligently
 // compare given syntax against known wrapped command usage to display --help when an incorrect command is given
-const usages = `
+const usage = `
 usage: meta git remote [-v | --verbose]
    or: meta git remote add [-t <branch>] [-m <master>] [-f] [--tags | --no-tags] [--mirror=<fetch|push>] <name> <url>
    or: meta git remote rename <old> <new>
@@ -26,26 +27,11 @@ usage: meta git remote [-v | --verbose]
 
     -v, --verbose         be verbose; must be placed before a subcommand`;
 
-if (process.argv[2] === '--help') return console.log(usages);
+if ( ! assertUsage('meta git remote', usage)) return console.log(usage);
 
-const valid = new Set();
-valid.add(undefined);
-valid.add('-v');
-valid.add('add');
-valid.add('rename');
-valid.add('remove');
-valid.add('set-head');
-valid.add('show');
-valid.add('set-branches');
-valid.add('get-url');
-valid.add('set-url');
+if (process.argv[2] === '--help') return console.log(usage);
 
-if ( ! valid.has(process.argv[2])) return console.log(usages);
-
-process.argv.shift()
-process.argv.shift()
-
-const subCommand = process.argv.join(' ');
+const subCommand = process.argv.slice(2).join(' ');
 
 var meta = null;
 var buffer = null;
