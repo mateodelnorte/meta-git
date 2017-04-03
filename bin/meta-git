@@ -11,6 +11,7 @@ program
   .command('checkout', 'checkout a common branch across all repositories')
   .command('clone', 'clone meta and child repositories')
   .command('pull', 'pull meta and child repositories')
+  .command('remote', 'execute git remote commands against meta and child repositories')
   .command('status', 'git status of meta and child repositories')
   .command('update', 'clone any repos that exist in your .meta file but aren\'t cloned locally')
   .parse(process.argv);
