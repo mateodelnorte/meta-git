@@ -4,7 +4,7 @@ const assertUsage = require('../lib/assertUsage');
 const fs = require('fs');
 const program = require('commander');
 const debug = require('debug')('meta-git-remote');
-const loop = require('loop-things');
+const metaLoop = require('meta-loop');
 const path = require('path');
 const util = require('util');
 
@@ -29,37 +29,4 @@ usage: meta git remote [-v | --verbose]
 
 if ( ! assertUsage('meta git remote', usage)) return console.log(usage);
 
-const subCommand = process.argv.slice(2).join(' ');
-
-var meta = null;
-var buffer = null;
-
-const metaLocation = path.join(process.cwd(), '.meta');
-
-try {
-  buffer = fs.readFileSync(metaLocation);
-  debug(`.meta file found at ${metaLocation}`);
-} catch (e) {
-  debug(`no .meta file found at ${metaLocation}: ${e}`);
-}
-
-if (buffer) {
-  try {
-    meta = JSON.parse(buffer.toString());
-    debug(`.meta file contents parsed: ${util.inspect(meta, null, Infinity)}`);
-  } catch (e) {
-    debug(`error parsing .meta JSON: ${e}`);
-  }
-}
-
-if ( ! meta) return console.error(`No .meta file found in ${process.cwd()}. Are you in a meta repo?`);
-
-const projects = meta.projects;
-const folders = Object.keys(projects).map((folder) => { return path.resolve(folder); });
-
-folders.unshift(process.cwd());
-
-loop({
-  command: `git remote ${subCommand}`,
-  directories: folders
-});
+metaLoop(`git remote ${process.argv.slice(2).join(' ')}`);
