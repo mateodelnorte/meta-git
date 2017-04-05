@@ -5,11 +5,15 @@
   "main": "index.js",
   "bin": {
     "meta-git": "./bin/meta-git",
+    "meta-git-branch": "./bin/meta-git-branch",
     "meta-git-checkout": "./bin/meta-git-checkout",
+    "meta-git-clean": "./bin/meta-git-clean",
     "meta-git-clone": "./bin/meta-git-clone",
     "meta-git-pull": "./bin/meta-git-pull",
+    "meta-git-push": "./bin/meta-git-push",
     "meta-git-remote": "./bin/meta-git-remote",
     "meta-git-status": "./bin/meta-git-status",
+    "meta-git-tag": "./bin/meta-git-tag",
     "meta-git-update": "./bin/meta-git-update"
   },
   "scripts": {
