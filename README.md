@@ -5,7 +5,7 @@ git plugin for [meta](https://github.com/mateodelnorte/meta)
 ## Usage
 
 ```
-➜  development meta
+➜  meta
 
   Usage: meta [options] [command]
 
@@ -21,17 +21,23 @@ git plugin for [meta](https://github.com/mateodelnorte/meta)
     -V, --version  output the version number
 ```
 ```
-➜  development meta git
+➜  meta git
 
-    Usage: meta-git [options] [command]
+  Usage: meta-git [options] [command]
 
 
   Commands:
 
-    checkout    checkout a common branch across all repositories
-    clone       clone meta and child repositories
-    status      git status of meta and child repositories
-    update      clone any repos that exist in your .meta file but aren't cloned locally
+    branch      List, create, or delete branches
+    checkout    Switch branches or restore working tree files
+    clean       Remove untracked files from the working tree
+    clone       Clone meta and child repositories into new directories
+    pull        Fetch from and integrate with another repository or a local branch
+    push        Update remote refs along with associated objects
+    remote      Manage set of tracked repositories
+    status      Show the working tree status
+    tag         Create, list, delete or verify a tag object signed with GPG
+    update      Clone any repos that exist in your .meta file but aren't cloned locally
     help [cmd]  display help for [cmd]
 
   Options:
