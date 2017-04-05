@@ -1,57 +1,20 @@
 #!/usr/bin/env node
 
-const fs = require('fs');
-const program = require('commander');
-const debug = require('debug')('meta-git-checkout');
-const loop = require('loop-things');
-const path = require('path');
-const util = require('util');
+const assertUsage = require('../lib/assertUsage');
+const metaLoop = require('meta-loop');
 
-if ( ! process.argv[2] || process.argv[2] === '--help')
-  return console.log(`\n  usage:\n\n    meta git checkout <branch>\n`);
+const usage = `
+usage: 
+       meta git checkout [-q] [-f] [-m] [<branch>]
+       meta git checkout [-q] [-f] [-m] --detach [<branch>]
+       meta git checkout [-q] [-f] [-m] [--detach] <commit>
+       meta git checkout [-q] [-f] [-m] [[-b|-B|--orphan] <new_branch>] [<start_point>]
+       meta git checkout [-f|--ours|--theirs|-m|--conflict=<style>] [<tree-ish>] [--] <paths>...
+       meta git checkout [-p|--patch] [<tree-ish>] [--] [<paths>...]
+       `;
 
-let branch = process.argv[2] === 'blank' ?
-                      process.argv[3] :
-                      process.argv[2];
+if (process.argv[2] === '--help') return console.log(usage);
 
-let create = false;
+if ( ! assertUsage('meta git checkout', usage, { allow: /.*/ })) return console.log(usage);
 
-if (branch === '-b') {
-  create = true;
-  branch = process.argv[3] === 'blank' ?
-                      process.argv[4] :
-                      process.argv[3];
-}
-
-var meta = null; 
-var buffer = null;
-
-const metaLocation = path.join(process.cwd(), '.meta');
-
-try {
-  buffer = fs.readFileSync(metaLocation);
-  debug(`.meta file found at ${metaLocation}`);
-} catch (e) {
-  debug(`no .meta file found at ${metaLocation}: ${e}`);
-}
-
-if (buffer) {
-  try {
-    meta = JSON.parse(buffer.toString());
-    debug(`.meta file contents parsed: ${util.inspect(meta, null, Infinity)}`);
-  } catch (e) {
-    debug(`error parsing .meta JSON: ${e}`);
-  }
-}
-
-if ( ! meta) return console.error(`No .meta file found in ${process.cwd()}. Are you in a meta repo?`);
-
-const projects = meta.projects;
-const folders = Object.keys(projects).map((folder) => { return path.resolve(folder); });
-
-folders.unshift(process.cwd());
-
-loop({
-  command: `git checkout ${create ? '-b' : ''} ${branch}`,
-  directories: folders
-});
+metaLoop(`git checkout ${process.argv.slice(2).join(' ')}`);

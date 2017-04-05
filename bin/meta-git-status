@@ -1,45 +1,20 @@
 #!/usr/bin/env node
 
-const fs = require('fs');
-const program = require('commander');
+const assertUsage = require('../lib/assertUsage');
 const debug = require('debug')('meta-git-status');
-const loop = require('loop-things');
-const path = require('path');
-const util = require('util');
+const metaLoop = require('meta-loop');
 
-if (process.argv[2] === '--help') {
-  return console.log(`\n  usage:\n\n    meta git status\n`);
-}
+const usage = `
+usage: 
+       meta git status [<options>...] [--] [<pathspec>...]
+       `;
 
-var meta = null; 
-var buffer = null;
+if (process.argv[2] === '--help') return console.log(usage);
 
-const metaLocation = path.join(process.cwd(), '.meta');
+if ( ! assertUsage('meta git status', usage, { allow: /.*/ })) return console.log(usage);
 
-try {
-  buffer = fs.readFileSync(metaLocation);
-  debug(`.meta file found at ${metaLocation}`);
-} catch (e) {
-  debug(`no .meta file found at ${metaLocation}: ${e}`);
-}
+const command = `git status ${process.argv.slice(2).join(' ')}`;
 
-if (buffer) {
-  try {
-    meta = JSON.parse(buffer.toString());
-    debug(`.meta file contents parsed: ${util.inspect(meta, null, Infinity)}`);
-  } catch (e) {
-    debug(`error parsing .meta JSON: ${e}`);
-  }
-}
+debug(`executing ${command}`);
 
-if ( ! meta) return console.error(`No .meta file found in ${process.cwd()}. Are you in a meta repo?`);
-
-const projects = meta.projects;
-const folders = Object.keys(projects).map((folder) => { return path.resolve(folder); });
-
-folders.unshift(process.cwd());
-
-loop({
-  command: 'git status',
-  directories: folders
-});
+metaLoop(command);
