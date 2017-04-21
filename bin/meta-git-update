@@ -2,7 +2,7 @@
 
 const exec = require('meta-exec');
 const fs = require('fs');
-const debug = require('debug')('meta-git-clone');
+const debug = require('debug')('meta-git-update');
 const path = require('path');
 const program = require('commander');
 const util = require('util');

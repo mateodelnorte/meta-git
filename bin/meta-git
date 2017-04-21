@@ -12,6 +12,7 @@ program
   .command('checkout', 'Switch branches or restore working tree files')
   .command('clean', 'Remove untracked files from the working tree')
   .command('clone', 'Clone meta and child repositories into new directories')
+  .command('diff', 'Show changes between commits, commit and working tree, etc')
   .command('pull', 'Fetch from and integrate with another repository or a local branch')
   .command('push', 'Update remote refs along with associated objects')
   .command('remote', 'Manage set of tracked repositories')

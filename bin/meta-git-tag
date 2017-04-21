@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 const assertUsage = require('../lib/assertUsage');
-const debug = require('debug')('meta-git-status');
+const debug = require('debug')('meta-git-tag');
 const metaLoop = require('meta-loop');
 
 const usage = `

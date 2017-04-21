@@ -1,6 +1,6 @@
 {
   "name": "meta-git",
-  "version": "0.0.20",
+  "version": "0.0.21",
   "description": "git plugin for meta",
   "main": "index.js",
   "bin": {
@@ -9,6 +9,7 @@
     "meta-git-checkout": "./bin/meta-git-checkout",
     "meta-git-clean": "./bin/meta-git-clean",
     "meta-git-clone": "./bin/meta-git-clone",
+    "meta-git-diff": "./bin/meta-git-diff",
     "meta-git-pull": "./bin/meta-git-pull",
     "meta-git-push": "./bin/meta-git-push",
     "meta-git-remote": "./bin/meta-git-remote",
@@ -43,6 +44,6 @@
     "debug": "^2.3.3",
     "loop-things": "0.0.23",
     "meta-exec": "0.0.0",
-    "meta-loop": "0.0.0"
+    "meta-loop": "0.0.1"
   }
 }
