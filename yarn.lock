@@ -379,9 +379,9 @@ lodash@^4.14.0, lodash@^4.17.2, lodash@^4.5.1:
   version "4.17.4"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.4.tgz#78203a4d1c328ae1d86dca6460e369b57f4055ae"
 
-loop-things@0.0.22:
+loop@0.0.22:
   version "0.0.22"
-  resolved "https://registry.yarnpkg.com/loop-things/-/loop-things-0.0.22.tgz#71c69aeb219171ddb98117bc2980ef01885dda4f"
+  resolved "https://registry.yarnpkg.com/loop/-/loop-0.0.22.tgz#71c69aeb219171ddb98117bc2980ef01885dda4f"
   dependencies:
     async "^2.1.4"
     chalk "^1.1.3"
@@ -396,9 +396,9 @@ loop-things@0.0.22:
     should "^11.1.2"
     yargs "^6.5.0"
 
-loop-things@0.0.23:
+loop@0.0.23:
   version "0.0.23"
-  resolved "https://registry.yarnpkg.com/loop-things/-/loop-things-0.0.23.tgz#c0b4817a2758c6d097afb15322a40363c8ca8744"
+  resolved "https://registry.yarnpkg.com/loop/-/loop-0.0.23.tgz#c0b4817a2758c6d097afb15322a40363c8ca8744"
   dependencies:
     async "^2.1.4"
     chalk "^1.1.3"
@@ -428,7 +428,7 @@ meta-loop@0.0.0:
   resolved "https://registry.yarnpkg.com/meta-loop/-/meta-loop-0.0.0.tgz#fe2556571d649a7484f19c6c5f43bc911c54ec24"
   dependencies:
     debug "^2.6.3"
-    loop-things "0.0.22"
+    loop "0.0.22"
 
 minimatch@^3.0.2:
   version "3.0.3"
