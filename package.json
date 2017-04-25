@@ -1,6 +1,6 @@
 {
   "name": "meta-git",
-  "version": "0.0.23",
+  "version": "0.0.24",
   "description": "git plugin for meta",
   "main": "index.js",
   "bin": {
@@ -46,7 +46,7 @@
     "commander": "^2.9.0",
     "debug": "^2.3.3",
     "loop": "3.0.0",
-    "meta-exec": "0.0.0",
-    "meta-loop": "0.0.2"
+    "meta-exec": "0.0.4",
+    "meta-loop": "0.0.3"
   }
 }
