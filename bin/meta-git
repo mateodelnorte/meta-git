@@ -15,6 +15,7 @@ program
   .command('clone', 'Clone meta and child repositories into new directories')
   .command('commit', 'Record changes to the repository')
   .command('diff', 'Show changes between commits, commit and working tree, etc')
+  .command('merge', 'Join two or more development histories together')
   .command('pull', 'Fetch from and integrate with another repository or a local branch')
   .command('push', 'Update remote refs along with associated objects')
   .command('remote', 'Manage set of tracked repositories')
