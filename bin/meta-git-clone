@@ -22,11 +22,13 @@ console.log(`meta git cloning into \'${repoUrl}\' at ${dirname}`);
 exec({ cmd: `git clone ${repoUrl} ${dirname}`, displayDir: dirname }, (err, result) => {
   if (err) throw err;
 
-  const meta = getMetaFile();
   const newDir = path.resolve(dirname);
 
   debug(`chdir to ${newDir}`);
+  
   process.chdir(newDir);
+
+  const meta = getMetaFile();
 
   const projects = meta.projects;
   const folders = Object.keys(projects);
