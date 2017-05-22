@@ -122,6 +122,12 @@ get-caller-file@^1.0.1:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/get-caller-file/-/get-caller-file-1.0.2.tgz#f702e63127e7e231c160a80c1554acb70d5047e5"
 
+get-meta-file@0.0.1:
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/get-meta-file/-/get-meta-file-0.0.1.tgz#93a1b4b2c187d41e70793b4dd793b4d9535c192c"
+  dependencies:
+    debug "^2.3.3"
+
 glob@7.0.5:
   version "7.0.5"
   resolved "https://registry.yarnpkg.com/glob/-/glob-7.0.5.tgz#b4202a69099bbb4d292a7c1b95b6682b67ebdc95"
@@ -278,6 +284,19 @@ loop@3.0.0:
     should "^11.1.2"
     yargs "^6.5.0"
 
+loop@3.0.1:
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/loop/-/loop-3.0.1.tgz#95a86696b095b595a2da16f586ad8c2e7966806c"
+  dependencies:
+    async "^2.1.4"
+    chalk "^1.1.3"
+    debug "^2.3.3"
+    lodash "^4.17.2"
+    meta-exec "0.0.4"
+    mocha "^3.2.0"
+    should "^11.1.2"
+    yargs "^6.5.0"
+
 meta-exec@0.0.0:
   version "0.0.0"
   resolved "https://registry.yarnpkg.com/meta-exec/-/meta-exec-0.0.0.tgz#322723de04ff07d35a45312c79d3b1016a81e8eb"
@@ -285,12 +304,22 @@ meta-exec@0.0.0:
     chalk "^1.1.3"
     debug "^2.6.0"
 
-meta-loop@0.0.2:
-  version "0.0.2"
-  resolved "https://registry.yarnpkg.com/meta-loop/-/meta-loop-0.0.2.tgz#cbcaa9c877b629ea5c3cb028a5de63376a50089d"
+meta-exec@0.0.4:
+  version "0.0.4"
+  resolved "https://registry.yarnpkg.com/meta-exec/-/meta-exec-0.0.4.tgz#f7beb15d136387a8514ca4a27cf801b9b2099145"
+  dependencies:
+    chalk "^1.1.3"
+    debug "^2.6.0"
+    get-meta-file "0.0.1"
+    meta-loop "0.0.3"
+
+meta-loop@0.0.3:
+  version "0.0.3"
+  resolved "https://registry.yarnpkg.com/meta-loop/-/meta-loop-0.0.3.tgz#a3ddb1bc2f3a24c96b5ebb7ee05d7c930b09156e"
   dependencies:
     debug "^2.6.3"
-    loop "3.0.0"
+    get-meta-file "0.0.1"
+    loop "3.0.1"
 
 minimatch@^3.0.2:
   version "3.0.3"

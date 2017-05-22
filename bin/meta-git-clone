@@ -3,6 +3,7 @@
 const exec = require('meta-exec');
 const fs = require('fs');
 const debug = require('debug')('meta-git-clone');
+const getMetaFile = require('get-meta-file');
 const path = require('path');
 const program = require('commander');
 const util = require('util');
@@ -21,28 +22,7 @@ console.log(`meta git cloning into \'${repoUrl}\' at ${dirname}`);
 exec({ cmd: `git clone ${repoUrl} ${dirname}`, displayDir: dirname }, (err, result) => {
   if (err) throw err;
 
-  // read .meta file
-  var meta = null; 
-  var buffer = null;
-
-  const metaLocation = path.join(process.cwd(), dirname, '.meta');
-
-  try {
-    buffer = fs.readFileSync(metaLocation);
-    debug(`.meta file found at ${metaLocation}`);
-  } catch (e) {
-    debug(`no .meta file found at ${metaLocation}: ${e}`);
-  }
-
-  if (buffer) {
-    try {
-      meta = JSON.parse(buffer.toString());
-      debug(`.meta file contents parsed: ${util.inspect(meta, null, Infinity)}`);
-    } catch (e) {
-      debug(`error parsing .meta JSON: ${e}`);
-    }
-  }
-
+  const meta = getMetaFile();
   const newDir = path.resolve(dirname);
 
   debug(`chdir to ${newDir}`);
