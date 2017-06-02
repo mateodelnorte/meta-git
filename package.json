@@ -1,6 +1,6 @@
 {
   "name": "meta-git",
-  "version": "0.0.27",
+  "version": "0.0.28",
   "description": "git plugin for meta",
   "main": "index.js",
   "bin": {
@@ -12,6 +12,7 @@
     "meta-git-clone": "./bin/meta-git-clone",
     "meta-git-commit": "./bin/meta-git-commit",
     "meta-git-diff": "./bin/meta-git-diff",
+    "meta-git-fetch": "./bin/meta-git-fetch",
     "meta-git-merge": "./bin/meta-git-merge",
     "meta-git-pull": "./bin/meta-git-pull",
     "meta-git-push": "./bin/meta-git-push",
