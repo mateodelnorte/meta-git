@@ -49,6 +49,6 @@
     "get-meta-file": "^0.0.5",
     "loop": "^3.0.6",
     "meta-exec": "^0.0.8",
-    "meta-loop": "^0.0.5"
+    "meta-loop": "^0.0.8"
   }
 }
