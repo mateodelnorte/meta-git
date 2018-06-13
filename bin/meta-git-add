@@ -18,6 +18,6 @@ if ( ! assertUsage('meta git add', usage, { allow: /.*/ })) return console.log(u
 
 const command = `git add ${process.argv.slice(2).join(' ')}`;
 
-debug(`executing ${command}`);
+debug(`executing %s`, command);
 
 metaLoop(command);

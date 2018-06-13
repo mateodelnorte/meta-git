@@ -21,6 +21,6 @@ if ( ! assertUsage('meta git tag', usage, { allow: /.*/ })) return console.log(u
 
 const command = `git tag ${process.argv.slice(2).join(' ')}`;
 
-debug(`executing ${command}`);
+debug(`executing %s`, command);
 
 metaLoop(command);

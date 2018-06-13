@@ -24,7 +24,7 @@ exec({ cmd: `git clone ${repoUrl} ${dirname}`, displayDir: dirname }, (err, resu
 
   const newDir = path.resolve(dirname);
 
-  debug(`chdir to ${newDir}`);
+  debug(`chdir to %s`, newDir);
 
   process.chdir(newDir);
 

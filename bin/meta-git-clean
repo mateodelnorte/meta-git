@@ -15,6 +15,6 @@ if ( ! assertUsage('meta git clean', usage, { allow: /.*/ })) return console.log
 
 const command = `git clean ${process.argv.slice(2).join(' ')}`;
 
-debug(`executing ${command}`);
+debug(`executing %s`, command);
 
 metaLoop(command);

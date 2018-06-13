@@ -19,6 +19,6 @@ if ( ! assertUsage('meta git diff', usage, { allow: /.*/ })) return console.log(
 
 const command = `git diff ${process.argv.slice(2).join(' ')}`;
 
-debug(`executing ${command}`);
+debug(`executing %s`, command);
 
 metaLoop(command);

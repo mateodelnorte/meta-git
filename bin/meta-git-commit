@@ -26,6 +26,6 @@ function parseCommand (argv) {
 
 const command = `git commit ${parseCommand(process.argv.slice(2))}`;
 
-debug(`executing ${command}`);
+debug(`executing %s`, command);
 
 metaLoop(command);
