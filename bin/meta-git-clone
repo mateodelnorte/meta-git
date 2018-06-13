@@ -25,7 +25,7 @@ exec({ cmd: `git clone ${repoUrl} ${dirname}`, displayDir: dirname }, (err, resu
   const newDir = path.resolve(dirname);
 
   debug(`chdir to ${newDir}`);
-  
+
   process.chdir(newDir);
 
   const meta = getMetaFile();
@@ -37,7 +37,7 @@ exec({ cmd: `git clone ${repoUrl} ${dirname}`, displayDir: dirname }, (err, resu
 
   function child (err) {
     if (err) throw err;
-    
+
     if ( ! folders.length) return 0;
 
     folder = folders.pop()

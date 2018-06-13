@@ -4,7 +4,7 @@ const assertUsage = require('../lib/assertUsage');
 const metaLoop = require('meta-loop');
 
 const usage = `
-usage: 
+usage:
        git merge [-n] [--stat] [--no-commit] [--squash] [--[no-]edit]
                [-s <strategy>] [-X <strategy-option>] [-S[<keyid>]]
                [--[no-]allow-unrelated-histories]

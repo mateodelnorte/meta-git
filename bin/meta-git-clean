@@ -5,7 +5,7 @@ const debug = require('debug')('meta-git-clean');
 const metaLoop = require('meta-loop');
 
 const usage = `
-usage: 
+usage:
        meta git clean [-d] [-f] [-i] [-n] [-q] [-e <pattern>] [-x | -X] [--] <path>...
        `;
 

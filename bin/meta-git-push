@@ -4,7 +4,7 @@ const assertUsage = require('../lib/assertUsage');
 const metaLoop = require('meta-loop');
 
 const usage = `
-usage: 
+usage:
        meta git push [--all | --mirror | --tags] [--follow-tags] [--atomic] [-n | --dry-run] [--receive-pack=<git-receive-pack>]
                   [--repo=<repository>] [-f | --force] [-d | --delete] [--prune] [-v | --verbose]
                   [-u | --set-upstream] [--push-option=<string>]

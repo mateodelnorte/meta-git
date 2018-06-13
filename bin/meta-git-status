@@ -5,7 +5,7 @@ const debug = require('debug')('meta-git-status');
 const metaLoop = require('meta-loop');
 
 const usage = `
-usage: 
+usage:
        meta git status [<options>...] [--] [<pathspec>...]
        `;
 

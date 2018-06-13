@@ -5,7 +5,7 @@ const debug = require('debug')('meta-git-diff');
 const metaLoop = require('meta-loop');
 
 const usage = `
-usage: 
+usage:
        meta git diff [options] [<commit>] [--] [<path>...]
        meta git diff [options] --cached [<commit>] [--] [<path>...]
        meta git diff [options] <commit> <commit> [--] [<path>...]

@@ -5,7 +5,7 @@ const debug = require('debug')('meta-git-fetch');
 const metaLoop = require('meta-loop');
 
 const usage = `
-usage: 
+usage:
        meta git fetch [<options>] [<repository> [<refspec>...]]
        meta git fetch [<options>] <group>
        meta git fetch --multiple [<options>] [(<repository> | <group>)...]

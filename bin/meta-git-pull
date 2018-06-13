@@ -4,7 +4,7 @@ const assertUsage = require('../lib/assertUsage');
 const metaLoop = require('meta-loop');
 
 const usage = `
-usage: 
+usage:
        meta git pull [options] [<repository> [<refspec>...]]
        `;
 
