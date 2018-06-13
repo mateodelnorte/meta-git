@@ -43,11 +43,9 @@
   },
   "homepage": "https://github.com/mateodelnorte/meta-git#readme",
   "dependencies": {
-    "chalk": "^1.1.3",
     "commander": "^2.9.0",
     "debug": "^2.3.3",
     "get-meta-file": "^0.0.5",
-    "loop": "^3.0.6",
     "meta-exec": "^0.0.8",
     "meta-loop": "^0.0.8"
   }
