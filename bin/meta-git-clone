@@ -7,9 +7,21 @@ const getMetaFile = require('get-meta-file');
 const path = require('path');
 const program = require('commander');
 const util = require('util');
+const assertUsage = require('../lib/assertUsage');
+
+const usage = `
+usage: 
+       meta git clone <metaRepoUrl>
+       meta git clone <metaRepoUrl> --dir <foldername>
+       meta git clone <metaRepoUrl> --branch <branchname>
+       meta git clone <metaRepoUrl> --branch <branchname> --dir <foldername>
+       meta git clone <metaRepoUrl> --dir <foldername> --branch <branchname>
+       `;
 
 if ( ! process.argv[2] || process.argv[2] === '--help')
-  return console.log(`\n  usage:\n\n    meta git clone <metaRepoUrl>\n`);
+  return console.log(usage);
+if ( ! assertUsage('meta git clone', usage, { allow: /.*/ })) return console.log(usage);
+
 
 const repoUrl = process.argv[2] === 'blank' ?
                       process.argv[3] :
@@ -22,7 +34,7 @@ const branchNameIndex=process.argv.indexOf('--branch');
 const branch=branchNameIndex!==0?process.argv[branchNameIndex+1]:null;
 
 console.log(`meta git cloning into \'${repoUrl}\' at ${dirname}`);
-const mainCmd=branch===null?`git clone ${repoUrl} ${dirname}`: `git clone --single-branch -b ${branch} ${repoUrl} ${dirname}`;
+const mainCmd=branch===null?`git clone ${repoUrl} ${dirname}`: `git clone  -b ${branch} ${repoUrl} ${dirname}`;
 exec({ cmd: mainCmd , displayDir: dirname}, (err, result) => {
   if (err) throw err;
 
@@ -47,7 +59,7 @@ exec({ cmd: mainCmd , displayDir: dirname}, (err, result) => {
     folder = folders.pop()
 
     const gitUrl = projects[folder];
-	const cmd=branch===null?`git clone ${gitUrl} ${folder}`: `git clone --single-branch -b ${branch} ${gitUrl} ${folder}`;
+	const cmd=branch===null?`git clone ${gitUrl} ${folder}`: `git clone -b ${branch} ${gitUrl} ${folder}`;
 
     exec({ cmd: cmd, displayDir: path.join(newDir, folder) },  (err) => {
       if (err) throw err;
