@@ -11,13 +11,14 @@ const util = require('util');
 if ( ! process.argv[2] || process.argv[2] === '--help')
   return console.log(`\n  usage:\n\n    meta git clone <metaRepoUrl>\n`);
 
-const repoUrl = process.argv[2] === 'blank' ?
-                      process.argv[3] :
-                      process.argv[2];
 
-const dirname = path.basename(repoUrl).replace('.git', '');
+const offSet = process.argv[2] === 'blank' ? 1 :0
+
+const repoUrl = process.argv[2+offSet];
+const dirname = process.argv[3+offSet] || path.basename(repoUrl).replace('.git', '');
 
 console.log(`meta git cloning into \'${repoUrl}\' at ${dirname}`);
+
 
 exec({ cmd: `git clone ${repoUrl} ${dirname}`, displayDir: dirname }, (err, result) => {
   if (err) throw err;
