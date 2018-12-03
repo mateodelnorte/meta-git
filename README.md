@@ -1,4 +1,7 @@
 # meta-git
+
+[![Greenkeeper badge](https://badges.greenkeeper.io/mateodelnorte/meta-git.svg)](https://greenkeeper.io/)
+
 git plugin for [meta](https://github.com/mateodelnorte/meta)
 
 
