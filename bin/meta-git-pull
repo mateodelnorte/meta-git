@@ -10,6 +10,7 @@ usage:
 
 if (process.argv[2] === '--help') return console.log(usage);
 
-if ( ! assertUsage('meta git pull', usage, { allow: /.*/ })) return console.log(usage);
+if (!assertUsage('meta git pull', usage, { allow: /.*/ }))
+  return console.log(usage);
 
 metaLoop(`git pull ${process.argv.slice(2).join(' ')}`);
