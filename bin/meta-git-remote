@@ -29,6 +29,6 @@ usage:
 
 if (process.argv[2] === '--help') return console.log(usage);
 
-if ( ! assertUsage('meta git remote', usage)) return console.log(usage);
+if (!assertUsage('meta git remote', usage)) return console.log(usage);
 
 metaLoop(`git remote ${process.argv.slice(2).join(' ')}`);

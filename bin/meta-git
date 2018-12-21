@@ -17,12 +17,18 @@ program
   .command('diff', 'Show changes between commits, commit and working tree, etc')
   .command('fetch', 'Download objects and refs from another repository')
   .command('merge', 'Join two or more development histories together')
-  .command('pull', 'Fetch from and integrate with another repository or a local branch')
+  .command(
+    'pull',
+    'Fetch from and integrate with another repository or a local branch'
+  )
   .command('push', 'Update remote refs along with associated objects')
   .command('remote', 'Manage set of tracked repositories')
   .command('status', 'Show the working tree status')
   .command('tag', 'Create, list, delete or verify a tag object signed with GPG')
-  .command('update', 'Clone any repos that exist in your .meta file but aren\'t cloned locally')
+  .command(
+    'update',
+    "Clone any repos that exist in your .meta file but aren't cloned locally"
+  )
   .parse(process.argv);
 
 loaded = true;

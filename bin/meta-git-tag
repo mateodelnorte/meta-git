@@ -17,7 +17,8 @@ usage:
 
 if (process.argv[2] === '--help') return console.log(usage);
 
-if ( ! assertUsage('meta git tag', usage, { allow: /.*/ })) return console.log(usage);
+if (!assertUsage('meta git tag', usage, { allow: /.*/ }))
+  return console.log(usage);
 
 const command = `git tag ${process.argv.slice(2).join(' ')}`;
 

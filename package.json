@@ -50,5 +50,10 @@
     "loop": "^3.0.6",
     "meta-exec": "^1.0.0",
     "meta-loop": "^1.0.0"
+  },
+  "devDependencies": {
+    "husky": "^1.2.0",
+    "prettier": "^1.15.3",
+    "pretty-quick": "^1.8.0"
   }
 }
