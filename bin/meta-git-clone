@@ -22,8 +22,10 @@ if (!assertUsage('meta git clone', usage, { allow: /.*/ }))
 
 
 const args = require('minimist')(process.argv, {
+  boolean: 'recursive',
   alias: {b:'branch'},
-  default: { branch: 'master'}
+  default: { branch: 'master',
+             recursive: false }
 });
 
 const repoUrl =  args['_'][2] === 'blank' ?  args['_'][3] :  args['_'][2];
@@ -34,6 +36,8 @@ if (!dirname)
   dirname=path.basename(repoUrl).replace('.git', '');
 
 const repoBranch = args['branch'];
+
+const recursiveCB = args['recursive'] ? gitCloneChildRepos : null;
 
 console.log(`meta git cloning into \'${repoUrl}\' at ${dirname}`);
 
@@ -86,7 +90,7 @@ function gitCloneChildRepos() {
 
      while (folders.length) {
        folder = folders.pop();
-       gitCloneRepo(projects[folder], path.join(process.cwd(), folder), branches[folder]);
+       gitCloneRepo(projects[folder], path.join(process.cwd(), folder), branches[folder], recursiveCB);
      }
    }
 }
