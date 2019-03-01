@@ -8,6 +8,6 @@ const program = require('commander');
 const util = require('util');
 
 if (!process.argv[1] || process.argv[1] === '--help')
-  return console.log(`\n  usage:\n\n    meta git update\n`);
+  return console.log(`\n  usage:\n\n    meta git [--recursive] update\n`);
 
 require('../lib/metaGitUpdate')();

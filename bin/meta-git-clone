@@ -1,18 +1,13 @@
 #!/usr/bin/env node
 
-const exec = require('meta-exec');
-const fs = require('fs');
 const debug = require('debug')('meta-git-clone');
-const getMetaFile = require('get-meta-file');
-const path = require('path');
-const program = require('commander');
-const util = require('util');
 const assertUsage = require('../lib/assertUsage');
-
+const path = require('path');
+const update = require('../lib/metaGitUpdate');
 
 const usage = `
 usage:
-       meta git clone [(-b| --branch) <name> ] [--] <repository> [<directory>]
+       meta git clone [(-b| --branch) <name> ] [--recursive] [--] <repository> [<directory>]
        `;
 
 if (process.argv[2] === '--help') return console.log(usage);
@@ -24,8 +19,7 @@ if (!assertUsage('meta git clone', usage, { allow: /.*/ }))
 const args = require('minimist')(process.argv, {
   boolean: 'recursive',
   alias: {b:'branch'},
-  default: { branch: 'master',
-             recursive: false }
+  default: { branch: 'master' }
 });
 
 const repoUrl =  args['_'][2] === 'blank' ?  args['_'][3] :  args['_'][2];
@@ -37,62 +31,11 @@ if (!dirname)
 
 const repoBranch = args['branch'];
 
-const recursiveCB = args['recursive'] ? gitCloneChildRepos : null;
-
 console.log(`meta git cloning into \'${repoUrl}\' at ${dirname}`);
 
-gitCloneRepo(repoUrl,dirname,repoBranch,gitCloneChildRepos);
+update.cloneRepo(repoUrl, dirname, repoBranch);
 
-function gitCloneRepo(repoUrl, dirname, branch, cb) {
-  exec(
-    { cmd: `git clone ${repoUrl} ${dirname};`, displayDir: dirname },
-    (err, result) => {
-      if (err) throw err;
+process.chdir(dirname);
 
-      const cwd = process.cwd();
-      const newDir = path.resolve(dirname);
-
-      debug(`chdir to ${newDir}`);
-
-      process.chdir(newDir);
-
-      if (branch !== 'master') {
-        exec(
-          {
-            command: `git checkout ${branch}`,
-            displayDir: newDir,
-          },
-          cb,
-          err => {
-            throw err;
-          }
-        );
-      }
-      else {
-        if (cb) cb();
-      }
-
-      process.chdir(cwd);
-    }
-  );
-}
-
-
-function gitCloneChildRepos() {
-   if (fs.existsSync('.meta')) {
-     const meta = getMetaFile();
-
-     const projects = meta.projects;
-     const branches = meta.branches;
-     const folders = Object.keys(projects);
-
-     var folder = null;
-
-     while (folders.length) {
-       folder = folders.pop();
-       gitCloneRepo(projects[folder], path.join(process.cwd(), folder), branches[folder], recursiveCB);
-     }
-   }
-}
-
+update();
 
