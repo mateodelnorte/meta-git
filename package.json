@@ -26,7 +26,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/mateodelnorte/meta-git.git"
+    "url": "https://github.com/mateodelnorte/meta-git.git"
   },
   "keywords": [
     "git",
