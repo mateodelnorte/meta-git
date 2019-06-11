@@ -17,46 +17,43 @@ const dirname = path.basename(repoUrl).replace('.git', '');
 
 console.log(`meta git cloning into \'${repoUrl}\' at ${dirname}`);
 
-exec(
-  { cmd: `git clone ${repoUrl} ${dirname}`, displayDir: dirname },
-  (err, result) => {
+exec({ cmd: `git clone ${repoUrl} ${dirname}`, displayDir: dirname }, (err, result) => {
+  if (err) throw err;
+
+  const newDir = path.resolve(dirname);
+
+  debug(`chdir to ${newDir}`);
+
+  process.chdir(newDir);
+
+  const meta = getMetaFile();
+
+  const projects = meta.projects;
+  const folders = Object.keys(projects);
+
+  var folder = null;
+
+  function child(err) {
     if (err) throw err;
 
-    const newDir = path.resolve(dirname);
+    if (!folders.length) return 0;
 
-    debug(`chdir to ${newDir}`);
+    folder = folders.pop();
 
-    process.chdir(newDir);
+    const gitUrl = projects[folder];
 
-    const meta = getMetaFile();
+    exec(
+      {
+        cmd: `git clone ${gitUrl} ${folder}`,
+        displayDir: path.join(newDir, folder),
+      },
+      err => {
+        if (err) throw err;
 
-    const projects = meta.projects;
-    const folders = Object.keys(projects);
-
-    var folder = null;
-
-    function child(err) {
-      if (err) throw err;
-
-      if (!folders.length) return 0;
-
-      folder = folders.pop();
-
-      const gitUrl = projects[folder];
-
-      exec(
-        {
-          cmd: `git clone ${gitUrl} ${folder}`,
-          displayDir: path.join(newDir, folder),
-        },
-        err => {
-          if (err) throw err;
-
-          child();
-        }
-      );
-    }
-
-    child();
+        child();
+      }
+    );
   }
-);
+
+  child();
+});
