@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.com/mateodelnorte/meta-git.svg?branch=master)](https://travis-ci.com/mateodelnorte/meta-git)
+
 # meta-git
 git plugin for [meta](https://github.com/mateodelnorte/meta)
 
