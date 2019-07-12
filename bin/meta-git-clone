@@ -42,9 +42,12 @@ exec({ cmd: `git clone ${repoUrl} ${dirname}`, displayDir: dirname }, (err, resu
 
     const gitUrl = projects[folder];
 
+    fs.mkdirSync(folder, { recursive: true });
+
     exec(
       {
-        cmd: `git clone ${gitUrl} ${folder}`,
+        cmd: `git clone ${gitUrl} .`,
+        dir: folder,
         displayDir: path.join(newDir, folder),
       },
       err => {
