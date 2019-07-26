@@ -26,8 +26,32 @@ function parseCommand(argv) {
     .join(' ');
 }
 
+function openEditor(command) {
+  const tmp = require('tmp');
+  const { execSync } = require('child_process');
+  const tmpFile = tmp.fileSync();
+  const cmd = `$EDITOR ${tmpFile.name}`;
+  execSync(cmd, {stdio: 'inherit'});
+  command = replaceFilenameInCommand(command, tmpFile.name);
+  metaLoop(command);
+}
+
+function shouldOpenEditor(command) {
+  return command.search(/[^-]-F\s*same(?:[^-]|$)/) != -1
+}
+
+function replaceFilenameInCommand(command, filename) {
+  return command.replace(/([^-]-F\s*)same([^-]|$)/, `$1${filename}$2`);
+}
+
 const command = `git commit ${parseCommand(process.argv.slice(2))}`;
 
 debug(`executing ${command}`);
 
-metaLoop(command);
+
+if (shouldOpenEditor(command)) {
+  openEditor(command)
+}
+else {
+  metaLoop(command);
+}
