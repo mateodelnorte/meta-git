@@ -13,6 +13,7 @@
     "meta-git-commit": "./bin/meta-git-commit",
     "meta-git-diff": "./bin/meta-git-diff",
     "meta-git-fetch": "./bin/meta-git-fetch",
+    "meta-git-grep": "./bin/meta-git-grep",
     "meta-git-merge": "./bin/meta-git-merge",
     "meta-git-pull": "./bin/meta-git-pull",
     "meta-git-push": "./bin/meta-git-push",

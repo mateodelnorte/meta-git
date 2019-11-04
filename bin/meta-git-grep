@@ -1,0 +1,47 @@
+#!/usr/bin/env node
+
+const assertUsage = require('../lib/assertUsage');
+const debug = require('debug')('meta-git-grep');
+const metaLoop = require('meta-loop');
+
+const usage = `
+usage:
+       meta git grep [-a | --text] [-I] [--textconv] [-i | --ignore-case] [-w | --word-regexp]
+               [-v | --invert-match] [-h|-H] [--full-name]
+               [-E | --extended-regexp] [-G | --basic-regexp]
+               [-P | --perl-regexp]
+               [-F | --fixed-strings] [-n | --line-number] [--column]
+               [-l | --files-with-matches] [-L | --files-without-match]
+               [(-O | --open-files-in-pager) [<pager>]]
+               [-z | --null]
+               [ -o | --only-matching ] [-c | --count] [--all-match] [-q | --quiet]
+               [--max-depth <depth>] [--[no-]recursive]
+               [--color[=<when>] | --no-color]
+               [--break] [--heading] [-p | --show-function]
+               [-A <post-context>] [-B <pre-context>] [-C <context>]
+               [-W | --function-context]
+               [--threads <num>]
+               [-f <file>] [-e] <pattern>
+               [--and|--or|--not|(|)|-e <pattern>…]
+               [--recurse-submodules] [--parent-basename <basename>]
+               [ [--[no-]exclude-standard] [--cached | --no-index | --untracked] | <tree>…]
+               [--] [<pathspec>…]
+       `;
+
+if (process.argv[2] === '--help') return console.log(usage);
+
+if (!assertUsage('meta git grep', usage, { allow: /.*/ })) return console.log(usage);
+
+function parseCommand(argv) {
+  return argv
+    .map(arg => {
+      return arg.indexOf(' ') > 0 ? `"${arg}"` : arg;
+    })
+    .join(' ');
+}
+
+const command = `git grep ${parseCommand(process.argv.slice(2))}`;
+
+debug(`executing ${command}`);
+
+metaLoop(command);

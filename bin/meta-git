@@ -16,6 +16,7 @@ program
   .command('commit', 'Record changes to the repository')
   .command('diff', 'Show changes between commits, commit and working tree, etc')
   .command('fetch', 'Download objects and refs from another repository')
+  .command('grep', 'Print lines matching a pattern')
   .command('merge', 'Join two or more development histories together')
   .command('pull', 'Fetch from and integrate with another repository or a local branch')
   .command('push', 'Update remote refs along with associated objects')
