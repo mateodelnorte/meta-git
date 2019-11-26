@@ -54,7 +54,7 @@
   "homepage": "https://github.com/mateodelnorte/meta-git#readme",
   "dependencies": {
     "chalk": "^3.0.0",
-    "commander": "^2.9.0",
+    "commander": "^4.0.0",
     "debug": "^4.1.0",
     "get-meta-file": "^1.0.0",
     "loop": "^3.0.6",
