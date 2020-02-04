@@ -11,7 +11,8 @@ const util = require('util');
 if (!process.argv[2] || process.argv[2] === '--help')
   return console.log(`\n  usage:\n\n    meta git clone <metaRepoUrl>\n`);
 
-const repoUrl = process.argv[2] === 'blank' ? process.argv[3] : process.argv[2];
+const repoUrlUnescaped = process.argv[2] === 'blank' ? process.argv[3] : process.argv[2];
+const repoUrl = repoUrlUnescaped.replace(/[;|]/gi, ''); // Escape potential harmful characters to fix a Command Execution
 
 const dirname = path.basename(repoUrl).replace('.git', '');
 
