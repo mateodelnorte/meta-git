@@ -4,22 +4,7 @@
   "description": "git plugin for meta",
   "main": "index.js",
   "bin": {
-    "meta-git": "./bin/meta-git",
-    "meta-git-add": "./bin/meta-git-add",
-    "meta-git-branch": "./bin/meta-git-branch",
-    "meta-git-checkout": "./bin/meta-git-checkout",
-    "meta-git-clean": "./bin/meta-git-clean",
-    "meta-git-clone": "./bin/meta-git-clone",
-    "meta-git-commit": "./bin/meta-git-commit",
-    "meta-git-diff": "./bin/meta-git-diff",
-    "meta-git-fetch": "./bin/meta-git-fetch",
-    "meta-git-merge": "./bin/meta-git-merge",
-    "meta-git-pull": "./bin/meta-git-pull",
-    "meta-git-push": "./bin/meta-git-push",
-    "meta-git-remote": "./bin/meta-git-remote",
-    "meta-git-status": "./bin/meta-git-status",
-    "meta-git-tag": "./bin/meta-git-tag",
-    "meta-git-update": "./bin/meta-git-update"
+    "meta-git": "./bin/meta-git"
   },
   "scripts": {
     "commit": "git-cz",
