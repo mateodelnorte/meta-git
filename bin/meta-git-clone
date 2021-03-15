@@ -29,32 +29,42 @@ exec({ cmd: `git clone ${repoUrl} ${dirname}`, displayDir: dirname }, (err, resu
 
   const meta = getMetaFile();
 
-  const projects = meta.projects;
-  const folders = Object.keys(projects);
+  const projects = recursiveSearch(meta.projects);
 
-  var folder = null;
+  let project = null;
 
   function child(err) {
     if (err) throw err;
 
-    if (!folders.length) return 0;
+    if (!projects.length) return 0;
 
-    folder = folders.pop();
-
-    const gitUrl = projects[folder];
+    project = projects.pop();
 
     exec(
-      {
-        cmd: `git clone ${gitUrl} ${folder}`,
-        displayDir: path.join(newDir, folder),
-      },
-      err => {
-        if (err) throw err;
+        {
+          cmd: `git clone ${project.git} ${project.folder}`,
+          displayDir: path.join(newDir, project.folder),
+        },
+        err => {
+          if (err) throw err;
 
-        child();
-      }
+          child();
+        }
     );
   }
 
   child();
 });
+
+const recursiveSearch = (obj, results = []) => {
+  const r = results;
+  Object.keys(obj).forEach(key => {
+    const value = obj[key];
+    if (typeof value !== 'object') {
+      r.push({folder: key, git: value});
+    } else if (typeof value === 'object') {
+      recursiveSearch(value, r);
+    }
+  });
+  return r;
+};
