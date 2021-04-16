@@ -69,6 +69,6 @@
     "husky": "2.7.0",
     "jest": "24.9.0",
     "prettier": "1.19.1",
-    "pretty-quick": "1.11.1"
+    "pretty-quick": "3.1.0"
   }
 }
