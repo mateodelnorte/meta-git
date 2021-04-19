@@ -51,7 +51,7 @@
     "commander": "^2.20.3",
     "debug": "^4.3.2",
     "get-meta-file": "^1.3.4",
-    "loop": "^3.3.4",
+    "loop": "^3.3.5",
     "meta-exec": "^1.4.2",
     "meta-loop": "^1.2.2"
   },
